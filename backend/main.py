@@ -31,6 +31,12 @@ app.include_router(ai_router, prefix="/api/v1/ai", tags=["AI Features"])
 app.include_router(content_router, prefix="/api/v1", tags=["Content"])
 
 # Mount static files for content images and uploads
+import os
+
+# Create directories if they don't exist
+os.makedirs("content", exist_ok=True)
+os.makedirs("uploads", exist_ok=True)
+
 app.mount("/content", StaticFiles(directory="content"), name="content")
 app.mount("/uploads", StaticFiles(directory="uploads"), name="uploads")
 
