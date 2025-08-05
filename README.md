@@ -11,6 +11,9 @@ A modern, AI-enhanced QR code generator application with a beautiful user interf
 - **Real-time Preview**: Instant QR code generation and preview
 - **Export Options**: PNG, SVG, and PDF formats
 - **User-Friendly**: Intuitive interface for all users
+- **Database Storage**: All designs and content stored securely
+- **Analytics**: Track QR code usage and scans
+- **Search & Management**: Find and manage your QR designs
 
 ## 🛠️ Tech Stack
 
@@ -25,9 +28,11 @@ A modern, AI-enhanced QR code generator application with a beautiful user interf
 ### Backend
 - **Python FastAPI** for API
 - **Pydantic** for data validation
+- **SQLAlchemy** with SQLite database
 - **QR Code generation** with qrcode library
 - **AI Integration** for smart suggestions
 - **CORS** enabled for frontend communication
+- **File upload** and storage management
 
 ## 📁 Project Structure
 
@@ -51,6 +56,9 @@ QuickQR/
 │   │   ├── services/      # Business logic
 │   │   └── utils/         # Utility functions
 │   ├── requirements.txt    # Python dependencies
+│   ├── init_db.py         # Database initialization
+│   ├── quickqr.db         # SQLite database (created on first run)
+│   ├── uploads/           # Uploaded files directory
 │   └── main.py           # FastAPI application entry
 ├── docs/                  # Documentation
 └── README.md             # Project documentation
@@ -73,7 +81,14 @@ venv\Scripts\activate
 source venv/bin/activate
 
 pip install -r requirements.txt
-uvicorn main:app --reload --host 0.0.0.0 --port 8000
+
+# Initialize the database
+python init_db.py
+
+# Start the application
+python main.py
+# Or use uvicorn directly
+# uvicorn main:app --reload --host 0.0.0.0 --port 8000
 ```
 
 ### Frontend Setup
@@ -87,6 +102,22 @@ npm run dev
 - Frontend: http://localhost:5173
 - Backend API: http://localhost:8000
 - API Documentation: http://localhost:8000/docs
+
+## 🗄️ Database Management
+
+The application uses SQLite for storing user designs and content. For detailed database setup and management instructions, see [DATABASE.md](backend/DATABASE.md).
+
+### Quick Database Commands
+```bash
+# Initialize database (first time setup)
+python init_db.py
+
+# Reset database (clear all data)
+python init_db.py reset
+
+# Backup database
+cp quickqr.db quickqr_backup_$(date +%Y%m%d_%H%M%S).db
+```
 
 ## 🎨 Features Overview
 

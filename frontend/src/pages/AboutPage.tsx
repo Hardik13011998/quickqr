@@ -7,7 +7,10 @@ import {
   Users, 
   Shield,
   Zap,
-  Palette
+  Palette,
+  User,
+  Mail,
+  Phone
 } from 'lucide-react'
 
 const AboutPage = () => {
@@ -186,11 +189,61 @@ const AboutPage = () => {
           </div>
         </motion.section>
 
-        {/* Call to Action */}
+        {/* Developer/Owner Information */}
         <motion.section
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 1.6 }}
+          className="mb-16"
+        >
+          <h2 className="text-2xl font-bold text-gray-900 text-center mb-8">
+            Meet the Developer
+          </h2>
+          <div className="card p-8 max-w-2xl mx-auto">
+            <div className="text-center mb-6">
+              <div className="w-20 h-20 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <User className="w-10 h-10 text-primary-600" />
+              </div>
+              <h3 className="text-xl font-bold text-gray-900 mb-2">Hardik Kothari</h3>
+              <p className="text-gray-600">Full Stack Developer & Creator of QuickQR</p>
+            </div>
+            
+            <div className="space-y-4">
+              <div className="flex items-center justify-center space-x-3">
+                <Mail className="w-5 h-5 text-primary-600" />
+                <a 
+                  href="mailto:hardikkothari27@gmail.com" 
+                  className="text-gray-700 hover:text-primary-600 transition-colors duration-200"
+                >
+                  hardikkothari27@gmail.com
+                </a>
+              </div>
+              
+              <div className="flex items-center justify-center space-x-3">
+                <Phone className="w-5 h-5 text-primary-600" />
+                <a 
+                  href="tel:+919714022130" 
+                  className="text-gray-700 hover:text-primary-600 transition-colors duration-200"
+                >
+                  +91 9714022130
+                </a>
+              </div>
+            </div>
+            
+            <div className="mt-6 pt-6 border-t border-gray-200">
+              <p className="text-gray-600 text-center">
+                QuickQR is a passion project built with modern technologies to provide the best QR code generation experience. 
+                Feel free to reach out for any questions, suggestions, or collaboration opportunities!
+              </p>
+            </div>
+          </div>
+        </motion.section>
+
+        {/* Call to Action */}
+        <motion.section
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 1.8 }}
           className="text-center"
         >
           <div className="card p-8 bg-gradient-to-r from-primary-600 to-primary-700 text-white">

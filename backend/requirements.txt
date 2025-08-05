@@ -12,4 +12,7 @@ httpx
 aiofiles
 jinja2
 openai
-requests 
+requests
+sqlalchemy
+alembic
+psycopg2-binary 

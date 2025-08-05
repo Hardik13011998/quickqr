@@ -2,8 +2,10 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 import uvicorn
-from app.api.routes import qr_router, ai_router
+from app.api.routes import qr_router, ai_router, content_router
 from app.core.config import settings, get_port
+from app.core.database import create_tables
+from app.models.database_models import Base
 
 # Create FastAPI app instance
 app = FastAPI(
@@ -26,6 +28,16 @@ app.add_middleware(
 # Include API routes
 app.include_router(qr_router, prefix="/api/v1/qr", tags=["QR Codes"])
 app.include_router(ai_router, prefix="/api/v1/ai", tags=["AI Features"])
+app.include_router(content_router, prefix="/api/v1", tags=["Content"])
+
+# Mount static files for content images and uploads
+app.mount("/content", StaticFiles(directory="content"), name="content")
+app.mount("/uploads", StaticFiles(directory="uploads"), name="uploads")
+
+# Initialize database tables
+@app.on_event("startup")
+async def startup_event():
+    create_tables()
 
 @app.get("/")
 async def root():

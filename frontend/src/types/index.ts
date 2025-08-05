@@ -7,12 +7,15 @@ export interface QRCodeRequest {
   foreground_color: string
   background_color: string
   logo_url?: string
+  title?: string
+  description?: string
 }
 
 export interface QRCodeResponse {
   success: boolean
   qr_code_data?: string
-  qr_code_url?: string
+  qr_id?: string
+  view_url?: string
   error?: string
   metadata?: QRCodeMetadata
 }
@@ -36,7 +39,7 @@ export interface AISuggestionResponse {
   confidence_score: number
 }
 
-export type QRCodeType = 'url' | 'text' | 'contact' | 'wifi' | 'email' | 'phone' | 'sms'
+export type QRCodeType = 'url' | 'text' | 'contact' | 'wifi' | 'email' | 'phone' | 'sms' | 'content'
 
 export type ErrorCorrectionLevel = 'L' | 'M' | 'Q' | 'H'
 
@@ -97,4 +100,15 @@ export interface APIError {
   message: string
   status?: number
   details?: any
+}
+
+export interface QRContentDisplay {
+  qr_id: string
+  title?: string
+  description?: string
+  content: string
+  content_type: string
+  image_url?: string
+  created_at: string
+  qr_type: QRCodeType
 } 

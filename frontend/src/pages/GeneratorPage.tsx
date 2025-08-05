@@ -159,6 +159,7 @@ const GeneratorPage = () => {
                  register={register}
                  errors={errors}
                  onSubmit={onSubmit}
+                 onSubmitWithFile={onSubmitWithFile}
                  isGenerating={isGenerating}
                  watch={watch}
                />
