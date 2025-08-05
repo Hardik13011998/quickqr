@@ -8,10 +8,12 @@ interface QRCodeFormProps {
   errors: FieldErrors<QRCodeRequest>
   onSubmit: (data: QRCodeRequest) => void
   isGenerating: boolean
+  watch: any
 }
 
-const QRCodeForm = ({ register, errors, onSubmit, isGenerating }: QRCodeFormProps) => {
+const QRCodeForm = ({ register, errors, onSubmit, isGenerating, watch }: QRCodeFormProps) => {
   const [qrType, setQrType] = useState<QRCodeRequest['qr_type']>('url')
+  const content = watch('content')
 
   const qrTypeOptions = [
     { value: 'url', label: 'URL', icon: Globe, description: 'Website links' },
@@ -101,7 +103,21 @@ const QRCodeForm = ({ register, errors, onSubmit, isGenerating }: QRCodeFormProp
       {/* Generate Button */}
       <button
         type="submit"
-        onClick={() => onSubmit({ content: '', qr_type: qrType, size: 10, error_correction: 'M', border: 4, foreground_color: '#000000', background_color: '#FFFFFF' })}
+        onClick={(e) => {
+          e.preventDefault()
+          if (!content || !content.trim()) {
+            return
+          }
+          onSubmit({ 
+            content: content.trim(), 
+            qr_type: qrType, 
+            size: 10, 
+            error_correction: 'M', 
+            border: 4, 
+            foreground_color: '#000000', 
+            background_color: '#FFFFFF' 
+          })
+        }}
         disabled={isGenerating}
         className="w-full btn-primary py-3 text-base font-medium"
       >

@@ -155,12 +155,13 @@ const GeneratorPage = () => {
                 Generate QR Code
               </h2>
               
-              <QRCodeForm
-                register={register}
-                errors={errors}
-                onSubmit={onSubmit}
-                isGenerating={isGenerating}
-              />
+                             <QRCodeForm
+                 register={register}
+                 errors={errors}
+                 onSubmit={onSubmit}
+                 isGenerating={isGenerating}
+                 watch={watch}
+               />
             </div>
 
             {/* AI Suggestions */}
