@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { UseFormRegister, FieldErrors } from 'react-hook-form'
-import { QRCodeRequest } from '../types'
+import { QRCodeRequest, QRCodeType } from '../types'
 import { Globe, FileText, User, Wifi, Mail, Phone, MessageSquare } from 'lucide-react'
 
 interface QRCodeFormProps {

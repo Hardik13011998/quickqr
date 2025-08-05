@@ -8,7 +8,8 @@ import {
   Copy, 
   Sparkles, 
   Settings, 
-  RefreshCw
+  RefreshCw,
+  CheckCircle
 } from 'lucide-react'
 import { QRCodeRequest, AISuggestionResponse } from '../types'
 import { qrCodeAPI, aiAPI } from '../services/api'
@@ -29,7 +30,6 @@ const GeneratorPage = () => {
 
   const {
     register,
-    handleSubmit,
     watch,
     setValue,
     formState: { errors }
