@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { QrCode, AlertCircle } from 'lucide-react'
+import { QrCode } from 'lucide-react'
 
 interface QRCodePreviewProps {
   qrCodeData: string | null

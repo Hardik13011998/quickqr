@@ -58,7 +58,7 @@ const QRCodeForm = ({ register, errors, onSubmit, isGenerating }: QRCodeFormProp
               <button
                 key={option.value}
                 type="button"
-                onClick={() => setQrType(option.value)}
+                onClick={() => setQrType(option.value as QRCodeType)}
                 className={`p-3 rounded-lg border-2 transition-all duration-200 text-left ${
                   qrType === option.value
                     ? 'border-primary-500 bg-primary-50 text-primary-700'

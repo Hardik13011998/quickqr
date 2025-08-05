@@ -10,7 +10,6 @@ import {
   Smartphone,
   Globe,
   Users,
-  CheckCircle,
   Wifi
 } from 'lucide-react'
 

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { useForm } from 'react-hook-form'
 import toast from 'react-hot-toast'
@@ -8,12 +8,9 @@ import {
   Copy, 
   Sparkles, 
   Settings, 
-  Palette,
-  RefreshCw,
-  CheckCircle,
-  AlertCircle
+  RefreshCw
 } from 'lucide-react'
-import { QRCodeRequest, QRCodeResponse, AISuggestionResponse } from '../types'
+import { QRCodeRequest, AISuggestionResponse } from '../types'
 import { qrCodeAPI, aiAPI } from '../services/api'
 import QRCodeForm from '../components/QRCodeForm'
 import QRCodePreview from '../components/QRCodePreview'
@@ -161,7 +158,7 @@ const GeneratorPage = () => {
               <QRCodeForm
                 register={register}
                 errors={errors}
-                onSubmit={handleSubmit(onSubmit)}
+                onSubmit={onSubmit}
                 isGenerating={isGenerating}
               />
             </div>
