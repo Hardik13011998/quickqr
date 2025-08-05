@@ -44,9 +44,15 @@ async def generate_qr_code(request: QRCodeRequest, db: Session = Depends(get_db)
                 description=request.description,
                 db=db
             )
+            
+            # Get the content data to find image URL
+            content_data = content_service.get_content(qr_id, db)
+            image_url = content_data.image_url if content_data else None
+        else:
+            image_url = None
         
         # Generate QR code
-        result = qr_service.generate_qr_code(request, qr_id)
+        result = qr_service.generate_qr_code(request, qr_id, image_url)
         
         if result["success"]:
             return QRCodeResponse(
@@ -101,8 +107,12 @@ async def generate_qr_code_with_image(
             db=db
         )
         
+        # Get the content data to find image URL
+        content_data = content_service.get_content(qr_id, db)
+        image_url = content_data.image_url if content_data else None
+        
         # Generate QR code
-        result = qr_service.generate_qr_code(qr_request, qr_id)
+        result = qr_service.generate_qr_code(qr_request, qr_id, image_url)
         
         if result["success"]:
             return QRCodeResponse(

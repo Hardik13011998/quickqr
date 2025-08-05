@@ -15,12 +15,18 @@ class QRCodeService:
             border=4,
         )
     
-    def generate_qr_code(self, request: QRCodeRequest, qr_id: str = None) -> dict:
+    def generate_qr_code(self, request: QRCodeRequest, qr_id: str = None, image_url: str = None) -> dict:
         """Generate QR code based on the request parameters"""
         try:
-            # For content type, generate a link to our app
+            # For content type, generate a link to the image
             if request.qr_type == "content" and qr_id:
-                formatted_content = f"https://quickqr-frontend.onrender.com/view/{qr_id}"
+                if image_url:
+                    # Use the backend URL for the image
+                    base_url = "https://quickqr-backend.onrender.com"
+                    formatted_content = f"{base_url}{image_url}"
+                else:
+                    # Fallback to view URL
+                    formatted_content = f"https://quickqr-frontend.onrender.com/view/{qr_id}"
             else:
                 # Format content based on QR type
                 formatted_content = self._format_content(request.content, request.qr_type)

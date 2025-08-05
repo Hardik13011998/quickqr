@@ -15,4 +15,5 @@ openai
 requests
 sqlalchemy
 alembic
-psycopg2-binary 
+psycopg2-binary
+Pillow 

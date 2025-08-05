@@ -6,10 +6,12 @@ from fastapi import UploadFile
 from sqlalchemy.orm import Session
 from app.models.qr_models import QRContentDisplay, QRCodeType
 from app.services.database_service import DatabaseService
+from app.services.text_to_image_service import TextToImageService
 
 class ContentService:
     def __init__(self):
         self.db_service = DatabaseService()
+        self.text_to_image_service = TextToImageService()
     
     async def save_content(self, 
                           content: str, 
@@ -39,17 +41,27 @@ class ContentService:
         """Internal method to save content with database session"""
         qr_id = str(uuid.uuid4())
         
-        # Determine content type
+        # Determine content type and handle image creation
         content_type = "text"
         image_filename = None
         image_path = None
         
         if image_file:
-            # Save image using database service
+            # Save uploaded image using database service
             design_image = await self.db_service.save_design_image(db, qr_id, image_file)
             image_filename = design_image.filename
             image_path = design_image.file_path
             content_type = "text+image" if content.strip() else "image"
+        elif content.strip() and qr_type == "content":
+            # Create text image for content type
+            image_filename = self.text_to_image_service.create_text_image(
+                text=content,
+                title=title,
+                description=description,
+                qr_id=qr_id
+            )
+            image_path = f"/content/{image_filename}"
+            content_type = "text"
         
         # Save content data to database
         self.db_service.save_content_data(
@@ -132,7 +144,12 @@ class ContentService:
         # Get image URL if exists
         image_url = None
         if content_data.image_filename:
-            image_url = f"/uploads/{content_data.image_filename}"
+            if content_data.image_filename.endswith("_text.png"):
+                # Text-generated image
+                image_url = f"/content/{content_data.image_filename}"
+            else:
+                # Uploaded image
+                image_url = f"/uploads/{content_data.image_filename}"
         
         return QRContentDisplay(
             qr_id=qr_id,
