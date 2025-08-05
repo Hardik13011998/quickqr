@@ -21,4 +21,9 @@ export default defineConfig({
       },
     },
   },
+  preview: {
+    port: 5173,
+    host: true,
+    allowedHosts: ['quickqr-frontend.onrender.com', 'localhost', '127.0.0.1'],
+  },
 }) 
