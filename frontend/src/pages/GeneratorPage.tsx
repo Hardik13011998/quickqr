@@ -76,6 +76,30 @@ const GeneratorPage = () => {
     }
   }
 
+  // Generate QR code with file upload
+  const onSubmitWithFile = async (formData: FormData) => {
+    setIsGenerating(true)
+    try {
+      const response = await fetch(`${import.meta.env.VITE_API_URL || 'https://quickqr-backend.onrender.com/api/v1'}/qr/generate-with-image`, {
+        method: 'POST',
+        body: formData
+      })
+
+      const data = await response.json()
+
+      if (data.success && data.qr_code_data) {
+        setQrCodeData(data.qr_code_data)
+        toast.success('QR code generated successfully!')
+      } else {
+        toast.error(data.error || 'Failed to generate QR code')
+      }
+    } catch (error: any) {
+      toast.error(error.message || 'Failed to generate QR code')
+    } finally {
+      setIsGenerating(false)
+    }
+  }
+
   // Get AI suggestions
   const getAISuggestions = async () => {
     if (!watchedContent.trim()) {

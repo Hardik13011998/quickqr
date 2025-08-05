@@ -12,7 +12,7 @@ interface QRCodeFormProps {
   watch: any
 }
 
-const QRCodeForm = ({ register, errors, onSubmit, isGenerating, watch }: QRCodeFormProps) => {
+const QRCodeForm = ({ register, errors, onSubmit, onSubmitWithFile, isGenerating, watch }: QRCodeFormProps) => {
   const [qrType, setQrType] = useState<QRCodeRequest['qr_type']>('url')
   const [selectedFile, setSelectedFile] = useState<File | null>(null)
   const [title, setTitle] = useState('')
